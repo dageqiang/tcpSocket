@@ -135,3 +135,28 @@ Writen(int fd, void *ptr, size_t nbytes)
 		err_cout("writen error");
 }
 
+char* Fgets(char *ptr, int n, FILE *stream)
+{
+	char	*rptr;
+
+	if ( (rptr = fgets(ptr, n, stream)) == NULL && ferror(stream))
+		err_cout("fgets error");
+
+	return (rptr);
+}
+void Inet_pton(int family, const char *strptr, void *addrptr)
+{
+	int		n;
+
+	if ( (n = inet_pton(family, strptr, addrptr)) < 0)
+		err_cout("inet_pton error for ");	/* errno set */
+	else if (n == 0)
+		err_cout("inet_pton error for");	/* errno not set */
+
+	/* nothing to return */
+}
+void Connect(int fd, const struct sockaddr *sa, socklen_t salen)
+{
+	if (connect(fd, sa, salen) < 0)
+		err_cout("connect error");
+}
